@@ -1,0 +1,44 @@
+$viewport-width: 1080px
+$viewport-height: 600px
+$tile-width: ($viewport-width / 9)
+$tile-height: ($viewport-height / 5)
+$map-width: 20000px
+$map-height: 20000px
+
+#game-container
+  background: #f3f3f3
+  position: absolute
+  display: block
+  overflow: hidden
+  width: $viewport-width
+  height: $viewport-height
+  top: 5%
+  left: 50%
+  margin-left: -($viewport-width / 2)
+  #game-bg
+  #game-map
+    position: absolute
+    display: block
+    width: $map-width
+    height: $map-height
+    .tile
+      display: block
+      float: left
+      width: $tile-width
+      height: $tile-height
+      margin: 0
+      border: 0
+      color: #999
+    ._0000
+      background: #000
+    ._00100
+      background: #666
+  #game-fg
+    .player
+      position: absolute
+      width: $tile-width
+      height: $tile-height
+      left: ($tile-width * 4)
+      top: ($tile-width * 2)
+      background: #bab
+      z-index: 100
