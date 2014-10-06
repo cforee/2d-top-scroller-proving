@@ -6,7 +6,7 @@ $map-width: 20000px
 $map-height: 20000px
 
 #game-container
-  background: #f3f3f3
+  background: #000
   position: absolute
   display: block
   overflow: hidden
@@ -30,9 +30,15 @@ $map-height: 20000px
       border: 0
       color: #999
     ._0000
-      background: #000
+      background: transparent url('../images/floors/1.png') 0 0 no-repeat
     ._00100
-      background: #666
+      background: transparent url('../images/walls/1.png') 0 0 no-repeat
+    ._00110
+      background: transparent url('../images/walls/2.png') 0 0 no-repeat
+    ._00120
+      background: transparent url('../images/walls/3.png') 0 0 no-repeat
+    ._00130
+      background: transparent url('../images/walls/4.png') 0 0 no-repeat
   #game-fg
     .player
       position: absolute
