@@ -1,7 +1,8 @@
 $(function() {
 
   // define variables
-  var Map, keyboard_mappings, player;
+  var Map, keyboard_mappings, player, soundtrack;
+  window.player_sprite = '/images/player/sprite_down_0010.png';
 
   // define and render map
   Map = {
@@ -60,11 +61,10 @@ $(function() {
     },
     redraw: function() {
       $(this.selector).stop();
-      $(this.selector)
-        .animate({ 
-          top: this.y+'px',
-          left: this.x+'px'
-        }, 200);
+      $(this.selector).animate({ 
+        top: this.y+'px',
+        left: this.x+'px'
+      }, 100);
     }
   }
   Map.render();
@@ -78,55 +78,76 @@ $(function() {
     row: 2,
     background_color: '#bab',
     render: function() {
-      $('#game-fg').append('<div class="player"></div>');
+      $('#game-fg').append('<div class="player"><img src="' + window.player_sprite + '" /></div>');
       $('.player').css({
         top: this.y,
         left: this.x
       })
+    },
+    redraw: function() {
+      $('.player img').attr('src',window.player_sprite);
     }
   }
   Player.render();
+
+  soundtrack = new Howl({
+    urls: ['/sounds/sndtrk_catacombs.ogg'],
+    autoplay: true,
+    loop: true,
+  });
 
   // define keyboard mappings
   keyboard_mappings = {
     up: 87,
     right: 68,
     down: 83,
-    left: 65
+    left: 65,
+    attack: 75
   }
 
   $(window).keydown(function(e) {
     var key_pressed = parseInt(e.keyCode);
+    console.log(key_pressed);
     var new_x, new_y;
     switch(key_pressed) {
       case keyboard_mappings.up:
+        set_sprite('up');
         new_y = Player.row - 1;
         if (!is_collision(Map, Player.col, new_y)) {
           Player.row -= 1;
           Map.move_down();
         }
+        Player.redraw();
         break;
       case keyboard_mappings.right:
+        set_sprite('right');
         new_x = Player.col + 1;
         if (!is_collision(Map, new_x, Player.row)) {
           Player.col += 1;
           Map.move_left();
         }
+        Player.redraw();
         break;
       case keyboard_mappings.down:
+        set_sprite('down');
         new_y = Player.row + 1;
         if (!is_collision(Map, Player.col, new_y)) {
           Player.row += 1;
           Map.move_up();
         }
+        Player.redraw();
         break;
       case keyboard_mappings.left:
+        set_sprite('left');
         new_x = Player.col - 1;
         if (!is_collision(Map, new_x, Player.row)) {
           Player.col -= 1;
           Map.move_right();
         }
+        Player.redraw();
         break;
+      case keyboard_mappings.attack:
+        attack();
       default:
         // do nothing
     }
@@ -138,4 +159,16 @@ function is_collision(Map,col,row) {
   var cell_value = Map.blueprint[row][col];
   if (cell_value > 9) return true;
   return false;
+}
+
+function set_sprite(direction) {
+  window.player_sprite = '/images/player/sprite_' + direction + '_0010.png';
+}
+
+function attack() {
+  swipe = new Howl({
+    urls: [ '/sounds/ssword_swoosh.mp3' ],
+    autoplay: true,
+    loop: false
+  });
 }
