@@ -94,6 +94,7 @@ $(function() {
     urls: ['/sounds/sndtrk_catacombs.ogg'],
     autoplay: true,
     loop: true,
+    volume: 0.8
   });
 
   // define keyboard mappings
