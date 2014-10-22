@@ -91,7 +91,7 @@ $(function() {
   Player.render();
 
   soundtrack = new Howl({
-    urls: ['/sounds/sndtrk_catacombs.ogg'],
+    urls: ['/sounds/sndtrk_catacombs_8k.ogg'],
     autoplay: true,
     loop: true,
   });
@@ -117,7 +117,7 @@ $(function() {
           Player.row -= 1;
           Map.move_down();
         }
-        Player.redraw();
+        Player.walk('up');
         break;
       case keyboard_mappings.right:
         set_sprite('right');
@@ -126,7 +126,7 @@ $(function() {
           Player.col += 1;
           Map.move_left();
         }
-        Player.redraw();
+        Player.walk('right');
         break;
       case keyboard_mappings.down:
         set_sprite('down');
@@ -135,7 +135,7 @@ $(function() {
           Player.row += 1;
           Map.move_up();
         }
-        Player.redraw();
+        Player.walk('down');
         break;
       case keyboard_mappings.left:
         set_sprite('left');
@@ -144,7 +144,7 @@ $(function() {
           Player.col -= 1;
           Map.move_right();
         }
-        Player.redraw();
+        Player.walk('left');
         break;
       case keyboard_mappings.attack:
         attack();
