@@ -1,3 +1,5 @@
+@import "compass/css3"
+
 $viewport-width: 1080px
 $viewport-height: 600px
 $tile-width: ($viewport-width / 9)
@@ -6,6 +8,8 @@ $map-width: 20000px
 $map-height: 20000px
 
 #game-container
+  -webkit-transform: perspective(1000) rotateX(35deg)
+  transform: perspective(1000px) rotateX(35deg)
   background: #000
   position: absolute
   display: block
@@ -41,6 +45,11 @@ $map-height: 20000px
       background: transparent url('../images/walls/4.png') 0 0 no-repeat
   #game-fg
     .player
+      -webkit-transform: none !important
+      -moz-transform: none !important
+      -ms-transform: none !important
+      -o-transform: none !important
+      transform: none !important
       position: absolute
       width: $tile-width
       height: $tile-height
